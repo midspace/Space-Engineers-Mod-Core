@@ -4,6 +4,12 @@
 
     public static class Guard
     {
+        public static void IsNotZero(byte value, string message)
+        {
+            if (value == 0)
+                throw new Exception(message);
+        }
+
         public static void IsNotZero(int value, string message)
         {
             if (value == 0)

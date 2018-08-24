@@ -43,7 +43,7 @@ namespace MidSpace.MySampleMod.SeModCore
             // Otherwise Treat everyone as Normal Player.
         }
 
-        public static uint UserSecurityLevel(this IMyPlayer player)
+        public static byte UserSecurityLevel(this IMyPlayer player)
         {
             switch (player.PromoteLevel)
             {

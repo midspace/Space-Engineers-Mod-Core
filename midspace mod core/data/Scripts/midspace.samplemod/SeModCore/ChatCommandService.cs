@@ -16,7 +16,7 @@
 
         private static readonly Dictionary<string, ChatCommand> Commands = new Dictionary<string, ChatCommand>();
         private static bool _isInitialized;
-        public static uint UserSecurity { get; set; }
+        public static byte UserSecurity { get; set; }
 
         #endregion
 

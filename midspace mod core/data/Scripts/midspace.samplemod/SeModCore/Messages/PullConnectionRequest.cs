@@ -37,7 +37,7 @@
 
             MainChatCommandLogic.Instance.ServerLogger.WriteInfo($"Player '{SenderDisplayName}' {SenderSteamId} connected. Version {ModCommunicationVersion}");
 
-            uint userSecurity = player.UserSecurityLevel();
+            byte userSecurity = player.UserSecurityLevel();
 
             // Is Server version older than what Client is running, or Server version is newer than Client.
             PushConnectionResponse.SendMessage(SenderSteamId, ModCommunicationVersion, MainChatCommandLogic.Instance.ModCommunicationVersion, userSecurity);

@@ -19,9 +19,9 @@
         public bool IsNewCommunicationVersion;
 
         [ProtoMember(205)]
-        public uint UserSecurity { get; set; }
+        public byte UserSecurity { get; set; }
 
-        public static void SendMessage(ulong steamdId, int clientModCommunicationVersion, int serverModCommunicationVersion, uint userSecurity)
+        public static void SendMessage(ulong steamdId, int clientModCommunicationVersion, int serverModCommunicationVersion, byte userSecurity)
         {
             ConnectionHelper.SendMessageToPlayer(steamdId, new PushConnectionResponse
             {

@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5E4DB4F7-FC9B-4FB6-9FAD-A40F5F7C3399}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MidSpace.MySampleMod</RootNamespace>
+    <AssemblyName>MidSpace.MySampleMod</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Sandbox.Common">
+      <HintPath>C:\Program Files\Reference Assemblies\SpaceEngineers\Sandbox.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Sandbox.Game">
+      <HintPath>C:\Program Files\Reference Assemblies\SpaceEngineers\Sandbox.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.Game">
+      <HintPath>C:\Program Files\Reference Assemblies\SpaceEngineers\SpaceEngineers.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.ObjectBuilders">
+      <HintPath>C:\Program Files\Reference Assemblies\SpaceEngineers\SpaceEngineers.ObjectBuilders.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage">
+      <HintPath>C:\Program Files\Reference Assemblies\SpaceEngineers\VRage.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Game">
+      <HintPath>C:\Program Files\Reference Assemblies\SpaceEngineers\VRage.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Library">
+      <HintPath>C:\Program Files\Reference Assemblies\SpaceEngineers\VRage.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Math">
+      <HintPath>C:\Program Files\Reference Assemblies\SpaceEngineers\VRage.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Render">
+      <HintPath>C:\Program Files\Reference Assemblies\SpaceEngineers\VRage.Render.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Commands\CommandTest03.cs" />
+    <Compile Include="Commands\CommandTest05.cs" />
+    <Compile Include="Commands\CommandTest02.cs" />
+    <Compile Include="SeModCore\Guard.cs" />
+    <Compile Include="SeModCore\Localize.cs" />
+    <Compile Include="SeModCore\ChatData.cs" />
+    <Compile Include="SeModCore\PullMessageBase.cs" />
+    <Compile Include="SeModCore\PushMessageBase.cs" />
+    <Compile Include="SeModCore\Messages\PushClientSound.cs" />
+    <Compile Include="SeModCore\Messages\PushClientConfig.cs" />
+    <Compile Include="SeModCore\Messages\PushChatCommand.cs" />
+    <Compile Include="SeModCore\Messages\PushClientDialogMessage.cs" />
+    <Compile Include="SeModCore\Messages\PushClientNotification.cs" />
+    <Compile Include="SeModCore\Messages\PushClientTextMessage.cs" />
+    <Compile Include="SeModCore\Messages\PullChatCommand.cs" />
+    <Compile Include="SeModCore\Messages\PullConnectionRequest.cs" />
+    <Compile Include="SeModCore\Messages\PushConnectionResponse.cs" />
+    <Compile Include="SeModCore\ChatCommand.cs" />
+    <Compile Include="SeModCore\ChatCommandService.cs" />
+    <Compile Include="SeModCore\ConnectionHelper.cs" />
+    <Compile Include="SeModCore\IChatCommandLogic.cs" />
+    <Compile Include="SeModCore\ClientConfigBase.cs" />
+    <Compile Include="SeModCore\MainChatCommandLogic.cs" />
+    <Compile Include="SeModCore\ModCoreConsts.cs" />
+    <Compile Include="SeModCore\ModCoreExtensions.cs" />
+    <Compile Include="SeModCore\TextLogger.cs" />
+    <Compile Include="Messages\PullClearScan.cs" />
+    <Compile Include="Messages\PullInitiateScan.cs" />
+    <Compile Include="Messages\PullSetTrack.cs" />
+    <Compile Include="Messages\PushSetTrack.cs" />
+    <Compile Include="Messages\ModMessageBaseList.cs" />
+    <Compile Include="Commands\CommandHelp.cs" />
+    <Compile Include="Commands\CommandTest04.cs" />
+    <Compile Include="Commands\CommandTest10.cs" />
+    <Compile Include="Commands\CommandTest06.cs" />
+    <Compile Include="Commands\CommandTest01.cs" />
+    <Compile Include="Entities\ScanServerEntity.cs" />
+    <Compile Include="Entities\ScanSettingsEntity.cs" />
+    <Compile Include="Entities\TrackDetailEntity.cs" />
+    <Compile Include="Entities\TrackGpsEntity.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Entities\SerializableMatrixD.cs" />
+    <Compile Include="Helpers\ShipGridExtension.cs" />
+    <Compile Include="Helpers\Support.cs" />
+    <Compile Include="ClientConfig.cs" />
+    <Compile Include="MySampleModLogic.cs" />
+    <Compile Include="ProgrammableBlockLogicChatCmds.cs" />
+    <Compile Include="ScanDataManager.cs" />
+    <Compile Include="MySampleModConsts.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\modinfo.sbmi">
+      <Link>modinfo.sbmi</Link>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Messages\PullFromClientToServer.txt" />
+    <Content Include="Messages\PushFromServerToClient.txt" />
+    <Content Include="SeModCore\Messages\PullFromClientToServer.txt" />
+    <Content Include="SeModCore\Messages\PushFromServerToClient.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rmdir /Q /S "$(ProjectDir)obj\"
+rmdir /Q /S "$(ProjectDir)bin\"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

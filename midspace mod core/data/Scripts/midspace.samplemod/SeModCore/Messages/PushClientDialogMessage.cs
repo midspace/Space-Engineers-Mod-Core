@@ -15,14 +15,17 @@
         [ProtoMember(203)]
         public string Content;
 
+        [ProtoMember(204)]
+        public SerializableArgument[] Arguments;
+
         public override void ProcessClient()
         {
-            MyAPIGateway.Utilities.ShowMissionScreen(Title, Prefix, " ", Content);
+            MyAPIGateway.Utilities.ShowMissionScreen(Localize.SubstituteTexts(Title), Localize.SubstituteTexts(Prefix), " ", Localize.SubstituteTexts(Content, Arguments));
         }
 
-        public static void SendMessage(ulong steamId, string title, string prefix, string content)
+        public static void SendMessage(ulong steamId, string title, string prefix, string content, params object[] args)
         {
-            ConnectionHelper.SendMessageToPlayer(steamId, new PushClientDialogMessage { Title = title, Prefix = prefix, Content = content });
+            ConnectionHelper.SendMessageToPlayer(steamId, new PushClientDialogMessage { Title = title, Prefix = prefix, Content = content, Arguments = SerializableArgument.ToSerializableArguments(args) });
         }
     }
 }

@@ -1,21 +1,12 @@
 ﻿namespace MidSpace.MySampleMod.Commands
 {
-    using Entities;
-    using Helpers;
-    using Messages;
     using Sandbox.ModAPI;
     using SeModCore;
-    using System;
-    using System.Text.RegularExpressions;
-    using VRage.Game;
-    using VRage.Game.ModAPI;
-    using VRage.Game.ModAPI.Interfaces;
 
     public class CommandTest05 : ChatCommand
     {
-
         public CommandTest05()
-            : base(ChatCommandSecurity.User, ChatCommandAccessibility.Client, "test05", new[] { "/test05" })
+            : base(ChatCommandSecurity.User, ChatCommandAccessibility.Server, "test05", new[] { "/test05" })
         {
         }
 
@@ -26,7 +17,8 @@
 
         public override bool Invoke(ChatData chatData)
         {
-            IMyPlayer player = MyAPIGateway.Session.Player;
+            MyAPIGateway.Utilities.SendMessage(chatData.SenderSteamId, "Server", "Sending message to console.");
+            VRage.Utils.MyLog.Default.WriteLineToConsole("Writting message to Console only.");
 
             return true;
         }

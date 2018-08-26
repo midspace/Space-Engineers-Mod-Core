@@ -1,9 +1,12 @@
 ﻿namespace MidSpace.MySampleMod.Commands
 {
     using System;
+    using System.IO;
+    using System.Text;
     using Messages;
     using Sandbox.ModAPI;
     using SeModCore;
+    using VRage;
     using VRage.Game.Components;
 
     public class CommandTest04 : ChatCommand
@@ -20,13 +23,15 @@
 
         public override bool Invoke(ChatData chatData)
         {
-            MySessionComponentBase mySessionComponentBase;
+            StringBuilder msg = new StringBuilder();
 
-            //var something = (IMyComponentOwner<MyDataBroadcaster>)MyAPIGateway.Session;
+            msg.AppendLine(@"Server string. Client Localized: ""{LOC:WorldSaved}""");
+            msg.AppendLine(@"Server string. Client Localized: ""{LOC:DisplayName_Item_GoldIngot}""");
+            msg.AppendLine();
 
-            //MyAPIGateway.Session.componen
-            //MyAPIGateway.Session.comp.m_sessionComponents.TryGetValue(typeof(T), out mySessionComponentBase);
-            //return mySessionComponentBase as T;
+            MyAPIGateway.Utilities.SendMessage(chatData.SenderSteamId, "Server", msg.ToString(), MyAPIGateway.Session.Name);
+
+            MyAPIGateway.Utilities.SendMissionScreen(chatData.SenderSteamId, "/Test03", null, " ", msg.ToString(), null, "OK", MyAPIGateway.Session.Name);
 
             return true;
         }

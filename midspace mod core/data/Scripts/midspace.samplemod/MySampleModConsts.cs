@@ -32,10 +32,10 @@
         internal const ushort ServerConnectionId = 06751;
         internal const ushort ClientConnectionId = 06750;
 
-        internal static readonly LogEventType ClientLoggingLevel = MyAPIGateway.Session.OnlineMode == MyOnlineModeEnum.OFFLINE ? LogEventType.All : LogEventType.Information;
+        internal static readonly LogEventType ClientLoggingLevel = MyAPIGateway.Session.IsSinglePlayerOffline() ? LogEventType.All : LogEventType.Information;
         internal const string ClientLogFileName = "MySampleModClient.Log";
 
-        internal static readonly LogEventType ServerLoggingLevel = MyAPIGateway.Session.OnlineMode == MyOnlineModeEnum.OFFLINE ? LogEventType.All : LogEventType.Information;
+        internal static readonly LogEventType ServerLoggingLevel = MyAPIGateway.Session.IsSinglePlayerOffline() ? LogEventType.All : LogEventType.Information;
         internal const string ServerLogFileName = "MySampleModServer.Log";
 
         /// <summary>

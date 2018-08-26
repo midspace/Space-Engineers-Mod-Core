@@ -76,6 +76,18 @@
             return text;
         }
 
+        public static string SubstituteTexts(string text, SerializableArgument[] args)
+        {
+            text = SubstituteTexts(text);
+
+            //if (Arguments != null && Arguments.Length != 0)
+            //    message = string.Format(message, Arguments);
+
+            //string.Format(text, )
+
+            return text;
+        }
+
         public static void AppendResource(this StringBuilder stringBuilder, string resource, params object[] args)
         {
             string text = SubstituteTexts(resource);

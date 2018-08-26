@@ -95,6 +95,7 @@
     <Compile Include="SeModCore\Guard.cs" />
     <Compile Include="SeModCore\Localize.cs" />
     <Compile Include="SeModCore\ChatData.cs" />
+    <Compile Include="SeModCore\SerializableArgument.cs" />
     <Compile Include="SeModCore\PullMessageBase.cs" />
     <Compile Include="SeModCore\PushMessageBase.cs" />
     <Compile Include="SeModCore\Messages\PushClientSound.cs" />

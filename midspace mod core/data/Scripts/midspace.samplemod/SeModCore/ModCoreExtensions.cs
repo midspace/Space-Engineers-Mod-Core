@@ -19,6 +19,17 @@ namespace MidSpace.MySampleMod.SeModCore
         }
 
         /// <summary>
+        /// This is an overly complex check to avoid issues that Torch develolpers have caused by utilizing the OnlineMode for other purposes.
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsSinglePlayerOffline (this IMySession session)
+        {
+            return session.OnlineMode == MyOnlineModeEnum.OFFLINE
+                   && session.IsServer // it calls MyAPIGateway.Multiplayer.IsServer.
+                   && !MyAPIGateway.Utilities.IsDedicated;
+        }
+
+        /// <summary>
         /// Determines if the player is an Administrator of the active game session.
         /// </summary>
         /// <param name="player"></param>
@@ -26,7 +37,7 @@ namespace MidSpace.MySampleMod.SeModCore
         public static bool IsAdmin(this IMyPlayer player)
         {
             // Offline mode. You are the only player.
-            if (MyAPIGateway.Session.OnlineMode == MyOnlineModeEnum.OFFLINE)
+            if (MyAPIGateway.Session.IsSinglePlayerOffline())
             {
                 return true;
             }
@@ -85,7 +96,7 @@ namespace MidSpace.MySampleMod.SeModCore
 
         public static void ShowMessage(this IMyUtilities utilities, string sender, string messageText, params object[] args)
         {
-            utilities.ShowMessage(sender, string.Format(messageText, args));
+            utilities.ShowMessage(sender, string.Format(Localize.SubstituteTexts(messageText), args));
         }
 
         /// <summary>
@@ -99,12 +110,12 @@ namespace MidSpace.MySampleMod.SeModCore
                 PushClientTextMessage.SendMessage(steamId, sender, messageText, args);
         }
 
-        public static void SendMissionScreen(this IMyUtilities utilities, ulong steamId, string screenTitle = null, string currentObjectivePrefix = null, string currentObjective = null, string screenDescription = null, Action<ResultEnum> callback = null, string okButtonCaption = null)
+        public static void SendMissionScreen(this IMyUtilities utilities, ulong steamId, string screenTitle = null, string currentObjectivePrefix = null, string currentObjective = null, string screenDescription = null, Action<ResultEnum> callback = null, string okButtonCaption = null, params object[] args)
         {
             if (steamId == MyAPIGateway.Multiplayer.ServerId || (MyAPIGateway.Session.Player != null && steamId == MyAPIGateway.Session.Player.SteamUserId))
-                utilities.ShowMissionScreen(screenTitle, currentObjectivePrefix, currentObjective, screenDescription, callback, okButtonCaption);
+                utilities.ShowMissionScreen(screenTitle, currentObjectivePrefix, currentObjective, string.Format(Localize.SubstituteTexts(screenDescription), args), callback, okButtonCaption);
             else
-                PushClientDialogMessage.SendMessage(steamId, screenTitle, currentObjectivePrefix, screenDescription);
+                PushClientDialogMessage.SendMessage(steamId, screenTitle, currentObjectivePrefix, screenDescription, args);
         }
 
         #endregion

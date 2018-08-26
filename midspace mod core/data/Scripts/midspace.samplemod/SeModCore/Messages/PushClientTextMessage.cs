@@ -12,20 +12,17 @@
         [ProtoMember(202)]
         public string Content;
 
+        [ProtoMember(203)]
+        public SerializableArgument[] Arguments;
+
         public override void ProcessClient()
         {
-            MyAPIGateway.Utilities.ShowMessage(Prefix, Content);
+            MyAPIGateway.Utilities.ShowMessage(Localize.SubstituteTexts(Prefix), Localize.SubstituteTexts(Content, Arguments));
         }
 
         public static void SendMessage(ulong steamId, string prefix, string content, params object[] args)
         {
-            string message;
-            if (args == null || args.Length == 0)
-                message = content;
-            else
-                message = string.Format(content, args);
-
-            ConnectionHelper.SendMessageToPlayer(steamId, new PushClientTextMessage { Prefix = prefix, Content = message });
+            ConnectionHelper.SendMessageToPlayer(steamId, new PushClientTextMessage { Prefix = prefix, Content = content, Arguments = SerializableArgument.ToSerializableArguments(args) });
         }
     }
 }

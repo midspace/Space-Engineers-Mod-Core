@@ -31,8 +31,7 @@
             var session = MyAPIGateway.Session;
             UserSecurity = ChatCommandSecurity.User;
 
-            if (MyAPIGateway.Multiplayer.IsServer || session.OnlineMode.Equals(MyOnlineModeEnum.OFFLINE)) // DS and Host.
-            //if (MyAPIGateway.Multiplayer.IsServer && MyAPIGateway.Utilities.IsDedicated)
+            if (MyAPIGateway.Multiplayer.IsServer || MyAPIGateway.Utilities.IsDedicated) // DS and Host.
             {
                 UserSecurity = ChatCommandSecurity.Admin;
                 //_isInitialized = true;
@@ -41,7 +40,7 @@
 
             //// Only set this in Single Player, in Multi Player we need to wait until the server sends us our level. 
             //// On Local Server this will be read in during the creation of the server cfg.
-            //if (session.Player.IsAdmin() && session.OnlineMode.Equals(MyOnlineModeEnum.OFFLINE))
+            //if (session.Player.IsAdmin() && session.IsSinglePlayerOffline())
             //if (session.Player.IsAdmin())
             //    _userSecurity = ChatCommandSecurity.Admin;
 
@@ -137,13 +136,13 @@
                     return true;
                 }
 
-                if (command.Value.HasFlag(ChatCommandAccessibility.SingleplayerOnly) && MyAPIGateway.Session.OnlineMode != MyOnlineModeEnum.OFFLINE)
+                if (command.Value.HasFlag(ChatCommandAccessibility.SingleplayerOnly) && !MyAPIGateway.Session.IsSinglePlayerOffline())
                 {
                     MyAPIGateway.Utilities.ShowMessage("Command Service", "Command disabled in online mode.");
                     return true;
                 }
 
-                if (command.Value.HasFlag(ChatCommandAccessibility.MultiplayerOnly) && MyAPIGateway.Session.OnlineMode == MyOnlineModeEnum.OFFLINE)
+                if (command.Value.HasFlag(ChatCommandAccessibility.MultiplayerOnly) && MyAPIGateway.Session.IsSinglePlayerOffline())
                 {
                     MyAPIGateway.Utilities.ShowMessage("Command Service", "Command disabled in offline mode.");
                     return true;
@@ -159,7 +158,7 @@
                 //    });
                 //    return true;
                 //}
-                if ((command.Value.HasFlag(ChatCommandAccessibility.Server) && MyAPIGateway.Session.OnlineMode == MyOnlineModeEnum.OFFLINE) ||
+                if ((command.Value.HasFlag(ChatCommandAccessibility.Server) && MyAPIGateway.Session.IsSinglePlayerOffline()) ||
                     (command.Value.HasFlag(ChatCommandAccessibility.Server) && MyAPIGateway.Multiplayer.IsServer) ||
                     command.Value.HasFlag(ChatCommandAccessibility.Client))
                 {
@@ -250,13 +249,13 @@
                     return true;
                 }
 
-                if (command.Value.HasFlag(ChatCommandAccessibility.SingleplayerOnly) && MyAPIGateway.Session.OnlineMode != MyOnlineModeEnum.OFFLINE)
+                if (command.Value.HasFlag(ChatCommandAccessibility.SingleplayerOnly) && !MyAPIGateway.Session.IsSinglePlayerOffline())
                 {
                     MyAPIGateway.Utilities.SendMessage(chatData.SenderSteamId, "Command Service", "Command disabled in online mode.");
                     return true;
                 }
 
-                if (command.Value.HasFlag(ChatCommandAccessibility.MultiplayerOnly) && MyAPIGateway.Session.OnlineMode == MyOnlineModeEnum.OFFLINE)
+                if (command.Value.HasFlag(ChatCommandAccessibility.MultiplayerOnly) && MyAPIGateway.Session.IsSinglePlayerOffline())
                 {
                     MyAPIGateway.Utilities.SendMessage(chatData.SenderSteamId, "Command Service", "Command disabled in offline mode.");
                     return true;
@@ -386,7 +385,7 @@
         //    else
         //    {
         //        //only set this in sp, in mp we need to wait until the server sends us our level. On LS this will be read in during the creation of the server cfg.
-        //        if (session.Player.IsAdmin() && session.OnlineMode.Equals(MyOnlineModeEnum.OFFLINE))
+        //        if (session.Player.IsAdmin() && session.IsSinglePlayerOffline())
         //            _userSecurity = ChatCommandSecurity.Admin;
         //        else
         //            _userSecurity = ChatCommandSecurity.User;

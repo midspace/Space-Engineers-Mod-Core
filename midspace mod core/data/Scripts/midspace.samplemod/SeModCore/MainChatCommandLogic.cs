@@ -221,7 +221,13 @@ namespace MidSpace.MySampleMod.SeModCore
             //TextLogger.WriteGameLog($"####### TEST8 {MyAPIGateway.Multiplayer == null}");
             //TextLogger.WriteGameLog($"####### TEST9 {MyAPIGateway.Multiplayer?.IsServer ?? null}");
 
-            if (MyAPIGateway.Session.OnlineMode.Equals(MyOnlineModeEnum.OFFLINE) || MyAPIGateway.Multiplayer.IsServer)
+            VRage.Utils.MyLog.Default.WriteLine($"CHECK1. #########################################");
+            VRage.Utils.MyLog.Default.WriteLine($"CHECK2. OnlineMode===== {MyAPIGateway.Session.OnlineMode} ");
+            VRage.Utils.MyLog.Default.WriteLine($"CHECK3. IsServer===== {MyAPIGateway.Multiplayer.IsServer}");
+            VRage.Utils.MyLog.Default.WriteLine($"CHECK4. IsDedicated==== {MyAPIGateway.Utilities.IsDedicated}");
+
+
+            if (MyAPIGateway.Multiplayer.IsServer || MyAPIGateway.Utilities.IsDedicated)
                 InitServer();
             if (!MyAPIGateway.Utilities.IsDedicated)
                 InitClient();
@@ -248,7 +254,7 @@ namespace MidSpace.MySampleMod.SeModCore
         private void InitClient()
         {
             _isClientRegistered = true;
-            ClientLogger.Init(ClientLogFileName, ClientLoggingLevel, false, MyAPIGateway.Session.OnlineMode.Equals(MyOnlineModeEnum.OFFLINE) ? 0 : 5); // comment this out if logging is not required for the Client.
+            ClientLogger.Init(ClientLogFileName, ClientLoggingLevel, false, MyAPIGateway.Session.IsSinglePlayerOffline() ? 0 : 5); // comment this out if logging is not required for the Client.
             ClientLogger.WriteInfo($"{ModName} Client Log Started");
             ClientLogger.WriteInfo($"{ModName} Client Version {ModCommunicationVersion}");
             //if (ClientLogger.IsActive) // TODO: determine is this is needed any more?
@@ -260,7 +266,7 @@ namespace MidSpace.MySampleMod.SeModCore
             MyAPIGateway.Multiplayer.RegisterMessageHandler(ClientConnectionId, _clientMessageHandler);
 
             // Offline connections can be re-attempted quickly. Online games needs to wait longer.
-            DelayedConnectionRequestTimer = new Timer(MyAPIGateway.Session.OnlineMode == MyOnlineModeEnum.OFFLINE ? 500 : 10000);
+            DelayedConnectionRequestTimer = new Timer(MyAPIGateway.Session.IsSinglePlayerOffline() ? 500 : 10000);
             DelayedConnectionRequestTimer.Elapsed += DelayedConnectionRequestTimer_Elapsed;
             DelayedConnectionRequestTimer.Start();
 
@@ -287,7 +293,7 @@ namespace MidSpace.MySampleMod.SeModCore
         private void InitServer()
         {
             _isServerRegistered = true;
-            ServerLogger.Init(ServerLogFileName, ServerLoggingLevel, false, MyAPIGateway.Session.OnlineMode.Equals(MyOnlineModeEnum.OFFLINE) ? 0 : 5); // comment this out if logging is not required for the Server.
+            ServerLogger.Init(ServerLogFileName, ServerLoggingLevel, false, MyAPIGateway.Session.IsSinglePlayerOffline() ? 0 : 5); // comment this out if logging is not required for the Server.
             ServerLogger.WriteInfo($"{ModName} Server Log Started");
             ServerLogger.WriteInfo($"{ModName} Server Version {ModCommunicationVersion}");
             //if (ServerLogger.IsActive) //if (ClientLogger.IsActive) // TODO: determine is this is needed any more?

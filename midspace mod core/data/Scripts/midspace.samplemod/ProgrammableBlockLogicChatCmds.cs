@@ -35,7 +35,7 @@ namespace MidSpace.MySampleMod
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             _objectBuilder = objectBuilder;
-            if (MyAPIGateway.Session.OnlineMode.Equals(MyOnlineModeEnum.OFFLINE) || MyAPIGateway.Multiplayer.IsServer)
+            if (MyAPIGateway.Multiplayer.IsServer || MyAPIGateway.Utilities.IsDedicated)
             {
                 this.NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 

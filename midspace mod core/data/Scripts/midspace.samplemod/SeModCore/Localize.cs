@@ -14,6 +14,12 @@
     {
         // TODO: Localize out our resources?
 
+        // VRage.Game.Localization.MyLocalization
+        private const string LOCALIZATION_TAG = "LOC";
+
+        // VRage.MyTexts.MyTexts()
+        private const string LOCALIZATION_TAG_GENERAL = "LOCG";
+            
 
         // Cannot use namespace "Sandbox.Game.Localization", as it's not whitelisted.
         //MyStringId WorldSaved = MySpaceTexts.WorldSaved;
@@ -53,7 +59,7 @@
             if (string.IsNullOrEmpty(text))
                 return text;
 
-            string[] tagReplace = { MyTexts.LOCALIZATION_TAG, MyTexts.LOCALIZATION_TAG_GENERAL, /* insert custom here. */ };
+            string[] tagReplace = { LOCALIZATION_TAG, LOCALIZATION_TAG_GENERAL, /* insert custom here. */ };
 
             foreach (string tag in tagReplace)
             {
